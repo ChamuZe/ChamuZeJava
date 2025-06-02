@@ -11,7 +11,7 @@ public class Main extends Application{
     @Override
     public void start(Stage primeiraCena) throws Exception{
         palco = primeiraCena;
-        palco.setTitle("Login - ChamuZé");
+        palco.setTitle("ChamuZé");
         mudarCena(TelaLogin.criarTela());
         palco.show();
 

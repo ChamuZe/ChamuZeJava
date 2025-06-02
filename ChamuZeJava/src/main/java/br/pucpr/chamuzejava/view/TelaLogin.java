@@ -1,10 +1,10 @@
 package br.pucpr.chamuzejava.view;
 
 import br.pucpr.chamuzejava.app.Main;
+import br.pucpr.chamuzejava.controller.ControllerUsuario;
+import br.pucpr.chamuzejava.model.Usuario;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
@@ -47,7 +47,16 @@ public class TelaLogin {
         telaLogin.add(botaoEnviar,1, 5);
 
         botaoEnviar.setOnAction(evento -> {
-            System.out.println("Botão enviar Clicado!");
+            //Lógica para realizar login
+            String email = entradaEmail.getText();
+            String senha = entradaSenha.getText();
+
+
+            ControllerUsuario controllerUsuario = new ControllerUsuario();
+            Usuario usuario = controllerUsuario.realizarLogin(email, senha);
+            controllerUsuario.setUsuario(usuario);
+            System.out.println("Usuario Logado: " + "Tipo: " + usuario.getClass());
+
         });
 
         //Campo para cadastrar caso não tenha conta
@@ -62,8 +71,8 @@ public class TelaLogin {
         telaLogin.add(linhaSeCadastrar, 1, 6);
 
         linkSeCadastrar.setOnMouseClicked(evento -> {
-            //Mudar para a tela de cadastro
-            Main.mudarCena(TelaCadastro.criarTela());
+            //Mudar para a tela de escolha de cadastro
+            Main.mudarCena(TelaEscolhaCadastro.criarTela());
         });
 
         return new Scene(telaLogin, 1000, 500) ;

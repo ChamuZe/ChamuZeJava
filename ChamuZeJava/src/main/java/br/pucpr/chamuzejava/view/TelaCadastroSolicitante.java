@@ -2,6 +2,7 @@ package br.pucpr.chamuzejava.view;
 
 import br.pucpr.chamuzejava.app.Main;
 import br.pucpr.chamuzejava.controller.ControllerUsuario;
+import br.pucpr.chamuzejava.model.Usuario;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -9,13 +10,13 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
-public class TelaCadastro {
+public class TelaCadastroSolicitante {
     public static Scene criarTela(){
         //Tela cadastro
         GridPane telaCadastro = new GridPane();
 
         //Título da tela de cadastro
-        Label tituloTelaCadastro = new Label("Cadastro");
+        Label tituloTelaCadastro = new Label("Cadastro Solicitante");
         telaCadastro.add(tituloTelaCadastro, 1, 0);
 
         //Campos tela de cadastro
@@ -32,18 +33,22 @@ public class TelaCadastro {
         //Botão para cadastrar
         Button botaoCadastrar = new Button("Cadastrar");
         telaCadastro.add(botaoCadastrar,1 ,5 );
+        //Cadastra o usuário
         botaoCadastrar.setOnAction(evento->{
-            System.out.println("Realizar cadastro");
+            //Pegando os dados do input
             String email = entradaEmail.getText();
             String senha = entradaSenha.getText();
 
-            ControllerUsuario controllerUsuario = new ControllerUsuario(email, senha);
+            Usuario usuario = new Usuario(email, senha);
+            ControllerUsuario controllerUsuario = new ControllerUsuario(usuario);
+            controllerUsuario.cadastrarUsuario();
 
         });
 
         //Botão voltar para Login
         Button botaoVoltarParaLogin = new Button("Voltar");
         telaCadastro.add(botaoVoltarParaLogin, 1, 6);
+        //Lógica para voltar para tela de login
         botaoVoltarParaLogin.setOnAction(evento->{
             Main.mudarCena(TelaLogin.criarTela());
         });
