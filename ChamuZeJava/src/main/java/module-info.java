@@ -4,5 +4,5 @@ module br.pucpr.chamuzejava {
 
 
     opens br.pucpr.chamuzejava to javafx.fxml;
-    exports br.pucpr.chamuzejava;
+    exports br.pucpr.chamuzejava.app;
 }
