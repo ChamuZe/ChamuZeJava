@@ -2,57 +2,113 @@ package br.pucpr.chamuzejava.view;
 
 import br.pucpr.chamuzejava.app.Main;
 import br.pucpr.chamuzejava.controller.ControllerUsuario;
-import br.pucpr.chamuzejava.model.Usuario;
+import br.pucpr.chamuzejava.model.Solicitante;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import java.time.LocalDate;
 
 public class TelaCadastroSolicitante {
-    public static Scene criarTela(){
-        //Tela cadastro
-        GridPane telaCadastro = new GridPane();
 
-        //Título da tela de cadastro
-        Label tituloTelaCadastro = new Label("Cadastro Solicitante");
-        telaCadastro.add(tituloTelaCadastro, 1, 0);
+    public static Scene criarTela() {
+        GridPane telaCadastroSolicitante = new GridPane();
 
-        //Campos tela de cadastro
+        // Título da tela
+        Label titulotelaCadastroPrestador = new Label("Cadastro Solicitante");
+        telaCadastroSolicitante.add(titulotelaCadastroPrestador, 1, 1);
+
+        // Nome
+        Label labelEntradaNome = new Label("Nome: ");
+        TextField entradaNome = new TextField();
+        telaCadastroSolicitante.add(labelEntradaNome, 1, 2);
+        telaCadastroSolicitante.add(entradaNome, 1, 3);
+
+        // Sobrenome
+        Label labelEntradaSobrenome = new Label("Sobrenome: ");
+        TextField entradaSobrenome = new TextField();
+        telaCadastroSolicitante.add(labelEntradaSobrenome, 1, 4);
+        telaCadastroSolicitante.add(entradaSobrenome, 1, 5);
+
+        // E-mail
         Label labelEntradaEmail = new Label("E-mail: ");
-        telaCadastro.add(labelEntradaEmail, 1, 1);
         TextField entradaEmail = new TextField();
-        telaCadastro.add(entradaEmail, 1, 2);
+        telaCadastroSolicitante.add(labelEntradaEmail, 1, 6);
+        telaCadastroSolicitante.add(entradaEmail, 1, 7);
 
+        // Senha
         Label labelEntradaSenha = new Label("Senha: ");
-        telaCadastro.add(labelEntradaSenha, 1, 3);
         PasswordField entradaSenha = new PasswordField();
-        telaCadastro.add(entradaSenha, 1, 4);
+        telaCadastroSolicitante.add(labelEntradaSenha, 1, 8);
+        telaCadastroSolicitante.add(entradaSenha, 1, 9);
 
-        //Botão para cadastrar
+        // CPF
+        Label labelEntradaCPF = new Label("CPF: ");
+        TextField entradaCPF = new TextField();
+        telaCadastroSolicitante.add(labelEntradaCPF, 1, 10);
+        telaCadastroSolicitante.add(entradaCPF, 1, 11);
+
+        // Telefone
+        Label labelEntradaTelefone = new Label("Telefone: ");
+        TextField entradaTelefone = new TextField();
+        telaCadastroSolicitante.add(labelEntradaTelefone, 1, 12);
+        telaCadastroSolicitante.add(entradaTelefone, 1, 13);
+
+        // Data de nascimento
+        Label labelentradaDataNascimento = new Label("Data de nascimento: ");
+        DatePicker entradaDataNascimento = new DatePicker();
+        telaCadastroSolicitante.add(labelentradaDataNascimento, 1, 14);
+        telaCadastroSolicitante.add(entradaDataNascimento, 1, 15);
+
+        // Gênero
+        Label labelGenero = new Label("Gênero: ");
+        RadioButton escolhaGeneroM = new RadioButton("M");
+        RadioButton escolhaGeneroF = new RadioButton("F");
+        RadioButton escolhaGeneroO = new RadioButton("O");
+
+        ToggleGroup grupoGenero = new ToggleGroup();
+        escolhaGeneroM.setToggleGroup(grupoGenero);
+        escolhaGeneroF.setToggleGroup(grupoGenero);
+        escolhaGeneroO.setToggleGroup(grupoGenero);
+
+        telaCadastroSolicitante.add(labelGenero, 1, 16);
+        telaCadastroSolicitante.add(escolhaGeneroM, 1, 17);
+        telaCadastroSolicitante.add(escolhaGeneroF, 1, 18);
+        telaCadastroSolicitante.add(escolhaGeneroO, 1, 19);
+
+        // Botão Cadastrar
         Button botaoCadastrar = new Button("Cadastrar");
-        telaCadastro.add(botaoCadastrar,1 ,5 );
-        //Cadastra o usuário
-        botaoCadastrar.setOnAction(evento->{
-            //Pegando os dados do input
+        telaCadastroSolicitante.add(botaoCadastrar, 1, 20);
+
+        botaoCadastrar.setOnAction(evento -> {
+            // Pegando os dados do input
+            String nome = entradaNome.getText();
+            String sobrenome = entradaSobrenome.getText();
             String email = entradaEmail.getText();
             String senha = entradaSenha.getText();
+            String cpf = entradaCPF.getText();
+            String telefone = entradaTelefone.getText();
+            LocalDate dataNascimento = entradaDataNascimento.getValue();
 
-            Usuario usuario = new Usuario(email, senha);
-            ControllerUsuario controllerUsuario = new ControllerUsuario(usuario);
+            Toggle selecionado = grupoGenero.getSelectedToggle();
+            RadioButton opcaoSelecionada = (RadioButton) selecionado;
+            String genero = opcaoSelecionada.getText();
+
+            Solicitante solicitante = new Solicitante(
+                    nome, sobrenome, email, senha, cpf, telefone, dataNascimento, genero
+            );
+
+            ControllerUsuario controllerUsuario = new ControllerUsuario(solicitante);
             controllerUsuario.cadastrarUsuario();
-
         });
 
-        //Botão voltar para Login
+        // Botão Voltar
         Button botaoVoltarParaLogin = new Button("Voltar");
-        telaCadastro.add(botaoVoltarParaLogin, 1, 6);
-        //Lógica para voltar para tela de login
-        botaoVoltarParaLogin.setOnAction(evento->{
+        telaCadastroSolicitante.add(botaoVoltarParaLogin, 1, 21);
+
+        botaoVoltarParaLogin.setOnAction(evento -> {
             Main.mudarCena(TelaLogin.criarTela());
         });
 
-        return new Scene(telaCadastro, 1000, 500);
+        return new Scene(telaCadastroSolicitante, 1000, 500);
     }
 }

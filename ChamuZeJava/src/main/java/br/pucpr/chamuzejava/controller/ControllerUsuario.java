@@ -10,8 +10,9 @@ import java.util.ArrayList;
 
 public class ControllerUsuario {
     // Constante com a pasta e o nome do arquivo para persistir o objeto
-    private final String CAMINHO_ARQUIVO = "src/main/java/br/pucpr/chamuzejava/file/baseDeDados.dat";
+    private final String CAMINHO_ARQUIVO = "baseDeDados.dat";
     private Usuario usuario;
+    public static Usuario usuarioLogado;
 
     //Construtor padrão
     public ControllerUsuario(){
@@ -75,13 +76,8 @@ public class ControllerUsuario {
         //Lógica para verificar tipo de perfil
         for (Usuario usuario : usuarios){
             if ((usuario.getEmail().equals(email)) && (usuario.getSenha().equals(senha))){
-                //Caso o usuario seja do tipo Prestador
-                if (usuario instanceof Prestador){
-                    return new Prestador();
-                    //Caso o usuario seja do tipo solicitante
-                } else if (usuario instanceof Solicitante) {
-                    return new Solicitante();
-                }
+                this.usuarioLogado = usuario;
+                return usuario;
             }
         }
 
