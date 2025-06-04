@@ -1,27 +1,45 @@
 package br.pucpr.chamuzejava.model;
-import br.pucpr.chamuzejava.file.categoria;
-import br.pucpr.chamuzejava.file.status_servico;
-import java.awt.image.BufferedImage;
+import br.pucpr.chamuzejava.file.Categoria;
+import br.pucpr.chamuzejava.file.StatusServico;
+import br.pucpr.chamuzejava.file.LocalServico;
 import java.io.Serializable;
 
 public class Servico implements Serializable{
     private static final long serialVersionUID = 1L;
+    private int solicitanteId;
+    private Proposta proposta;
     private String descricao;
     private String titulo;
-    private BufferedImage img;
-    private categoria categoria;
-    private String local_servico;
-    private status_servico status_servico;
+    private Categoria categoria;
+    private LocalServico localServico;
+    private StatusServico statusServico;
     private double preco;
 
-    public Servico(String descricao, String titulo, BufferedImage img, categoria categoria, String local_servico, status_servico status_servico, double preco ) {
+    public Servico(int solicitanteId, String descricao, String titulo, Categoria categoria, LocalServico localServico, double preco ) {
         this.descricao = descricao;
         this.titulo = titulo;
-        this.img = img;
+        this.solicitanteId = solicitanteId;
+        this.proposta = null;
         this.categoria = categoria;
-        this.local_servico = local_servico;
-        this.status_servico = status_servico;
+        this.localServico = localServico;
+        this.statusServico = StatusServico.DISPONIVEL;
         this.preco = preco;
+    }
+
+    public int getSolicitanteId() {
+        return solicitanteId;
+    }
+
+    public void setSolicitanteId(int solicitanteId) {
+        this.solicitanteId = solicitanteId;
+    }
+
+    public Proposta getProposta() {
+        return proposta;
+    }
+
+    public void setProposta(Proposta proposta) {
+        this.proposta = proposta;
     }
 
     public String getDescricao() {
@@ -40,36 +58,28 @@ public class Servico implements Serializable{
         this.titulo = titulo;
     }
 
-    public BufferedImage getImg(){
-        return img;
-    }
-
-    public void setImg(BufferedImage img) {
-        this.img = img;
-    }
-
-    public br.pucpr.chamuzejava.file.categoria getCategoria() {
+    public Categoria getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(br.pucpr.chamuzejava.file.categoria categoria) {
+    public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
 
-    public String getLocal_servico() {
-        return local_servico;
+    public LocalServico getLocalServico() {
+        return localServico;
     }
 
-    public void setLocal_servico(String local_servico) {
-        this.local_servico = local_servico;
+    public void setLocalServico(LocalServico localServico) {
+        this.localServico = localServico;
     }
 
-    public br.pucpr.chamuzejava.file.status_servico getStatus_servico() {
-        return status_servico;
+    public StatusServico getStatusServico() {
+        return statusServico;
     }
 
-    public void setStatus_servico(br.pucpr.chamuzejava.file.status_servico status_servico) {
-        this.status_servico = status_servico;
+    public void setStatusServico(StatusServico statusServico) {
+        this.statusServico = statusServico;
     }
 
     public double getPreco() {
@@ -79,4 +89,9 @@ public class Servico implements Serializable{
     public void setPreco(double preco) {
         this.preco = preco;
     }
+    @Override
+    public String toString() {
+        return "Descrição: " + descricao + "\nTitulo: " + titulo + "\nCategoria: " + categoria + "\nlocalServico" + "\nstatusServico: " + statusServico + "\nPreço: " + preco ;
+    }
 }
+

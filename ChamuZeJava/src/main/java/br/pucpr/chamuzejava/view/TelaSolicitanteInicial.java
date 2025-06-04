@@ -23,9 +23,14 @@ public class TelaSolicitanteInicial {
             Main.mudarCena(TelaPerfilSolicitante.criarTela());
         });
 
+        Button botaoSolicitarServico = new Button("Solicitar Serviço");
+        botaoSolicitarServico.setOnAction(e->{
+            Main.mudarCena(TelaSolicitarServico.criarTela());
+        });
+
         //Inclusão dos icones do NAVBAR
         barraDeNavegacao.getChildren().addAll(botaoPerfil);
-
+        barraDeNavegacao.getChildren().addAll(botaoSolicitarServico);
         //Adição do NAVBAR na tela
         telaSolicitante.add(barraDeNavegacao, 1, 0);
 
