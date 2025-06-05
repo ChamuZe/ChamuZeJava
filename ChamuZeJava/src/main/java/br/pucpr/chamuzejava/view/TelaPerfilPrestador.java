@@ -1,58 +1,91 @@
 package br.pucpr.chamuzejava.view;
 
+import br.pucpr.chamuzejava.app.Main;
 import br.pucpr.chamuzejava.controller.ControllerUsuario;
+import javafx.geometry.HPos;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
 public class TelaPerfilPrestador {
-    public static Scene criarTela(){
-        GridPane telaPerfilPrestador = new  GridPane();
+    public static Scene criarTela() {
+        GridPane telaPerfilPrestador = new GridPane();
 
-        // Campos do usuário
+        telaPerfilPrestador.setPadding(new Insets(40));
+        telaPerfilPrestador.setHgap(10);
+        telaPerfilPrestador.setVgap(15);
+        telaPerfilPrestador.setAlignment(Pos.CENTER);
+
+        // Título
+        Label titulo = new Label("Perfil do Prestador");
+        titulo.setStyle("-fx-font-size: 28px; -fx-font-weight: bold;");
+        telaPerfilPrestador.add(titulo, 0, 0, 2, 1);
+        GridPane.setHalignment(titulo, HPos.CENTER);
+
+        // Campos
         Label labelNome = new Label("Nome: " + ControllerUsuario.usuarioLogado.getNome());
-        telaPerfilPrestador.add(labelNome, 1, 2);
+        labelNome.setStyle("-fx-font-size: 16px;");
+        telaPerfilPrestador.add(labelNome, 0, 1);
 
-        Label labelSobreNome = new Label("Sobrenome: " + ControllerUsuario.usuarioLogado.getSobreNome());
-        telaPerfilPrestador.add(labelSobreNome, 1, 3);
+        Label labelSobrenome = new Label("Sobrenome: " + ControllerUsuario.usuarioLogado.getSobreNome());
+        labelSobrenome.setStyle("-fx-font-size: 16px;");
+        telaPerfilPrestador.add(labelSobrenome, 0, 2);
 
         Label labelEmail = new Label("Email: " + ControllerUsuario.usuarioLogado.getEmail());
-        telaPerfilPrestador.add(labelEmail, 1, 4);
+        labelEmail.setStyle("-fx-font-size: 16px;");
+        telaPerfilPrestador.add(labelEmail, 0, 3);
 
         Label labelSenha = new Label("Senha: " + ControllerUsuario.usuarioLogado.getSenha());
-        telaPerfilPrestador.add(labelSenha, 1, 5);
+        labelSenha.setStyle("-fx-font-size: 16px;");
+        telaPerfilPrestador.add(labelSenha, 0, 4);
 
         Label labelCpf = new Label("CPF: " + ControllerUsuario.usuarioLogado.getCpf());
-        telaPerfilPrestador.add(labelCpf, 1, 6);
+        labelCpf.setStyle("-fx-font-size: 16px;");
+        telaPerfilPrestador.add(labelCpf, 0, 5);
 
         Label labelTelefone = new Label("Telefone: " + ControllerUsuario.usuarioLogado.getTelefone());
-        telaPerfilPrestador.add(labelTelefone, 1, 7);
+        labelTelefone.setStyle("-fx-font-size: 16px;");
+        telaPerfilPrestador.add(labelTelefone, 0, 6);
 
         Label labelDataNascimento = new Label("Data de Nascimento: " + ControllerUsuario.usuarioLogado.getDataNascimento());
-        telaPerfilPrestador.add(labelDataNascimento, 1, 8);
+        labelDataNascimento.setStyle("-fx-font-size: 16px;");
+        telaPerfilPrestador.add(labelDataNascimento, 0, 7);
 
         Label labelGenero = new Label("Gênero: " + ControllerUsuario.usuarioLogado.getGenero());
-        telaPerfilPrestador.add(labelGenero, 1, 9);
+        labelGenero.setStyle("-fx-font-size: 16px;");
+        telaPerfilPrestador.add(labelGenero, 0, 8);
 
-        //Faltou CNPJ e Chave pix
+        // Botões
+        int linhaBotoes = 10; // próxima linha após os campos
 
-
-        //Botão para realizar a edição dos dados do usuário
-        Button botaoEditarSoliciante = new Button("Editar");
-        telaPerfilPrestador.add(botaoEditarSoliciante, 1,10);
-        botaoEditarSoliciante.setOnAction(e->{
+        Button botaoEditar = new Button("Editar");
+        botaoEditar.setPrefWidth(150);
+        botaoEditar.setStyle("-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-weight: bold;");
+        telaPerfilPrestador.add(botaoEditar, 0, linhaBotoes);
+        botaoEditar.setOnAction(e -> {
             System.out.println("Vai editar Usuário");
         });
 
-        //Bottão para realizar a exclusão da conta do usuário
-        Button botaoExcluirSoliciante = new Button("Excluir");
-        telaPerfilPrestador.add(botaoExcluirSoliciante, 1,11);
-        botaoExcluirSoliciante.setOnAction(e->{
+        Button botaoExcluir = new Button("Excluir");
+        botaoExcluir.setPrefWidth(150);
+        botaoExcluir.setStyle("-fx-background-color: #dc3545; -fx-text-fill: white; -fx-font-weight: bold;");
+        telaPerfilPrestador.add(botaoExcluir, 1, linhaBotoes);
+        botaoExcluir.setOnAction(e -> {
             System.out.println("Vai excluir Usuário");
         });
 
+        Button botaoVoltar = new Button("Voltar");
+        botaoVoltar.setPrefWidth(150);
+        botaoVoltar.setStyle("-fx-background-color: gray; -fx-text-fill: white;");
+        telaPerfilPrestador.add(botaoVoltar, 0, linhaBotoes + 1, 2, 1);
+        GridPane.setHalignment(botaoVoltar, HPos.CENTER);
+        botaoVoltar.setOnAction(e -> {
+            Main.mudarCena(TelaPrestadorInicial.criarTela());
+        });
 
-        return new Scene(telaPerfilPrestador, 1000, 500);
+        return new Scene(telaPerfilPrestador, 700, 650);
     }
 }
