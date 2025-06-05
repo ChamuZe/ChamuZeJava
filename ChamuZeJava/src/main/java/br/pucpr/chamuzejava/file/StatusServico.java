@@ -1,6 +1,6 @@
 package br.pucpr.chamuzejava.file;
 
-public enum status_servico {
+public enum StatusServico {
     ACEITO,
     DISPONIVEL
 }

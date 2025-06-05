@@ -1,6 +1,6 @@
 package br.pucpr.chamuzejava.file;
 
-public enum categoria {
+public enum Categoria {
     JARDINAGEM,
     LIMPEZA,
     ELETRICIDADE,
