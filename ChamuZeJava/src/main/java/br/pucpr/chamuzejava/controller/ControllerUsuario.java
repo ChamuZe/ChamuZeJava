@@ -23,12 +23,11 @@ public class ControllerUsuario {
     );
 
     public ControllerUsuario() {
-        inicializarAdminMaster();
+
     }
 
     public ControllerUsuario(Usuario usuario) {
         this.usuario = usuario;
-        System.out.println("Contrutor -> Dados do Usuário: " + usuario.getEmail() + "  " + usuario.getSenha());
     }
 
     public void setUsuario(Usuario usuario) {
@@ -149,6 +148,8 @@ public class ControllerUsuario {
             return false;
         }
     }
+
+    //Lógica Login
 
     public Usuario realizarLogin(String email, String senha) {
         ArrayList<Usuario> usuarios = lerLista();

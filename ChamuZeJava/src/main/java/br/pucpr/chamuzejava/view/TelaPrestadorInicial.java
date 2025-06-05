@@ -1,6 +1,8 @@
 package br.pucpr.chamuzejava.view;
 
 import br.pucpr.chamuzejava.app.Main;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -8,31 +10,36 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
 public class TelaPrestadorInicial {
-    public static Scene criarTela(){
-        //Tela do prestador
+    public static Scene criarTela() {
+        // Tela do prestador
         GridPane telaPrestador = new GridPane();
+        telaPrestador.setHgap(10);
+        telaPrestador.setVgap(20);
+        telaPrestador.setPadding(new Insets(20));
+        telaPrestador.setAlignment(Pos.TOP_CENTER);
 
-        //Barra de navegação
+        // Barra de navegação
         HBox barraDeNavegacao = new HBox();
-        //Campos do Nav necessários...
+        barraDeNavegacao.setSpacing(15);
+        barraDeNavegacao.setPadding(new Insets(10));
+        barraDeNavegacao.setAlignment(Pos.CENTER_LEFT);
 
-        //Perfil do usuário
+        // Botão de perfil
         Button botaoPerfil = new Button("Perfil");
-        //Acção do botão de perfil
-        botaoPerfil.setOnAction(e->{
+        botaoPerfil.setOnAction(e -> {
             Main.mudarCena(TelaPerfilPrestador.criarTela());
         });
 
-        //Inclusão dos icones do NAVBAR
+        // Inclusão dos ícones do NAVBAR
         barraDeNavegacao.getChildren().addAll(botaoPerfil);
 
-        //Adição do NAVBAR na tela
-        telaPrestador.add(barraDeNavegacao, 1, 0);
+        // Adição do NAVBAR na tela
+        telaPrestador.add(barraDeNavegacao, 0, 0);
 
-        //Titulo da tela
-        Label tituloTelaPrestador = new Label("Bem-vindo(a) Prestador!");
-        telaPrestador.add(tituloTelaPrestador, 1,1);
-
+        // Título da tela
+        Label tituloTelaPrestador = new Label("Bem-vindo(a), Prestador!");
+        tituloTelaPrestador.setStyle("-fx-font-size: 24px; -fx-font-weight: bold;");
+        telaPrestador.add(tituloTelaPrestador, 0, 1);
 
         return new Scene(telaPrestador, 1000, 500);
     }

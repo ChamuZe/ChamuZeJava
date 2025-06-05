@@ -2,6 +2,7 @@ package br.pucpr.chamuzejava.view;
 
 import br.pucpr.chamuzejava.app.Main;
 import br.pucpr.chamuzejava.controller.ControllerUsuario;
+import br.pucpr.chamuzejava.model.Prestador;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -58,8 +59,23 @@ public class TelaPerfilPrestador {
         labelGenero.setStyle("-fx-font-size: 16px;");
         telaPerfilPrestador.add(labelGenero, 0, 8);
 
+        if (ControllerUsuario.usuarioLogado instanceof Prestador) {
+            Prestador prestador = (Prestador) ControllerUsuario.usuarioLogado;
+            String cnpj = prestador.getCnpj();
+            String chavePix  = prestador.getChavePix();
+
+            Label labelCnpj = new Label("CNPJ: " + cnpj);
+            labelCnpj.setStyle("-fx-font-size: 16px;");
+            telaPerfilPrestador.add(labelCnpj, 0, 9);
+
+            Label labelChavePix = new Label("Chave Pix: " + chavePix);
+            labelCnpj.setStyle("-fx-font-size: 16px;");
+            telaPerfilPrestador.add(labelChavePix, 0, 10);
+        }
+
+
         // Botões
-        int linhaBotoes = 10; // próxima linha após os campos
+        int linhaBotoes = 11;
 
         Button botaoEditar = new Button("Editar");
         botaoEditar.setPrefWidth(150);
@@ -86,6 +102,6 @@ public class TelaPerfilPrestador {
             Main.mudarCena(TelaPrestadorInicial.criarTela());
         });
 
-        return new Scene(telaPerfilPrestador, 700, 650);
+        return new Scene(telaPerfilPrestador, 1100, 700);
     }
 }

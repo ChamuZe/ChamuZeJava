@@ -43,7 +43,7 @@ public class TelaLogin {
         TextField entradaEmail = new TextField();
         entradaEmail.setPromptText("Digite seu e-mail");
         entradaEmail.setPrefWidth(300);
-        entradaEmail.setStyle("-fx-font-size: 16px; -fx-pref-height: 35px;"); // Aumenta altura
+        entradaEmail.setStyle("-fx-font-size: 16px; -fx-pref-height: 35px;");
         telaLogin.add(entradaEmail, 1, 1);
 
         Label labelEntradaSenha = new Label("Senha:");
@@ -51,8 +51,7 @@ public class TelaLogin {
 
         PasswordField entradaSenha = new PasswordField();
         entradaSenha.setPromptText("Digite sua senha");
-        entradaSenha.setPrefWidth(300);
-        entradaSenha.setStyle("-fx-font-size: 16px; -fx-pref-height: 35px;"); // Aumenta altura
+        entradaSenha.setStyle("-fx-font-size: 16px; -fx-pref-height: 35px;");
         telaLogin.add(entradaSenha, 1, 2);
 
         Button botaoEnviar = new Button("Entrar");
@@ -87,8 +86,10 @@ public class TelaLogin {
                     System.out.println("Login como ADMIN bem-sucedido!");
                     Main.mudarCena(TelaPerfilADM.criarTela());
                 } else if (usuario instanceof Prestador) {
+                    System.out.println("Usuário se logou como Prestador");
                     Main.mudarCena(TelaPrestadorInicial.criarTela());
                 } else if (usuario instanceof Solicitante) {
+                    System.out.println("Usuário se logou como Solicitante");
                     Main.mudarCena(TelaSolicitanteInicial.criarTela());
                 }
             } else {

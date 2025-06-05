@@ -89,6 +89,6 @@ public class TelaPerfilSolicitante {
             Main.mudarCena(TelaSolicitanteInicial.criarTela());
         });
 
-        return new Scene(telaPerfilSolicitante, 700, 550);
+        return new Scene(telaPerfilSolicitante, 1100, 700);
     }
 }

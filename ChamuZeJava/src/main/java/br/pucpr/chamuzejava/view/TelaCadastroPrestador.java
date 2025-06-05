@@ -4,6 +4,7 @@ import br.pucpr.chamuzejava.app.Main;
 import br.pucpr.chamuzejava.controller.ControllerUsuario;
 import br.pucpr.chamuzejava.model.Prestador;
 import br.pucpr.chamuzejava.model.Usuario;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
@@ -14,11 +15,12 @@ public class TelaCadastroPrestador {
     public static Scene criarTela(){
         //Tela cadastro
         GridPane telaCadastroPrestador = new GridPane();
+        telaCadastroPrestador.setAlignment(Pos.CENTER);
 
         //Título da tela de cadastro
         Label titulotelaCadastroPrestador = new Label("Cadastro Prestador");
         telaCadastroPrestador.add(titulotelaCadastroPrestador, 1, 0);
-
+        titulotelaCadastroPrestador.setStyle("-fx-font-size:26px; -fx-font-weight:bold;");
         //Input de Nome
         Label labelEntradaNome = new Label("Nome: ");
         telaCadastroPrestador.add(labelEntradaNome, 1, 2);
@@ -94,6 +96,7 @@ public class TelaCadastroPrestador {
         //Botão para cadastrar
         Button botaoCadastrar = new Button("Cadastrar");
         telaCadastroPrestador.add(botaoCadastrar,1 ,24 );
+        botaoCadastrar.setStyle("-fx-background-color: #ffc107; -fx-text-fill: black; -fx-font-weight: bold;");
         //Cadastra o usuário
         botaoCadastrar.setOnAction(evento->{
             //Pegando os dados do input
@@ -115,17 +118,20 @@ public class TelaCadastroPrestador {
             ,cnpj, chavePix);
             ControllerUsuario controllerUsuario = new ControllerUsuario(prestador);
             controllerUsuario.cadastrarUsuario();
+            System.out.println("Prestador cadastrado com Sucesso!");
+            Main.mudarCena(TelaLogin.criarTela());
 
         });
 
         //Botão voltar para Login
         Button botaoVoltarParaLogin = new Button("Voltar");
         telaCadastroPrestador.add(botaoVoltarParaLogin, 1, 25);
+        botaoVoltarParaLogin.setStyle("-fx-background-color: #6C757D; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;");
         //Lógica para voltar para tela de login
         botaoVoltarParaLogin.setOnAction(evento->{
-            Main.mudarCena(TelaLogin.criarTela());
+            Main.mudarCena(TelaEscolhaCadastro.criarTela());
         });
 
-       return new Scene(telaCadastroPrestador, 1000, 500);
+       return new Scene(telaCadastroPrestador,1100, 700);
     }
 }
