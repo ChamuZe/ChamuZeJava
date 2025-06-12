@@ -9,6 +9,7 @@ public class Proposta implements Serializable  {
     private String servico;
     private String prestador;
     private String solicitante;
+    private String teste;
 //    private int id_solicitante;
 //    private int id_servico;
 //    private int id_prestador;
@@ -21,12 +22,13 @@ public class Proposta implements Serializable  {
 //    }
 
 
-    public Proposta(double preco, String justificativa, String servico, String prestador, String solicitante) {
+    public Proposta(double preco, String justificativa, String servico, String prestador, String solicitante, String teste) {
         this.preco = preco;
         this.justificativa = justificativa;
         this.servico = servico;
         this.prestador = prestador;
         this.solicitante = solicitante;
+        this.teste = teste;
     }
 
     public static long getSerialVersionUID() {
@@ -52,6 +54,10 @@ public class Proposta implements Serializable  {
     public String getSolicitante() {return solicitante;}
 
     public void setSolicitante(String solicitante) {this.solicitante = solicitante;}
+
+    public String getTeste() {return teste;}
+
+    public void setTeste(String teste) {this.teste = teste;}
 
     //    public int getId_solicitante() {return id_solicitante;}
 

@@ -22,8 +22,8 @@ public class TelaProposta {
         mainLayout.setPadding(new Insets(20));
 
         GridPane formGrid = new GridPane();
-        formGrid.setVgap(15);
-        formGrid.setHgap(10);
+        formGrid.setVgap(10);
+        formGrid.setHgap(5);
         formGrid.setPadding(new Insets(10));
 
         Label servicoLabel = new Label("Serviço: Teste");
@@ -33,6 +33,10 @@ public class TelaProposta {
         TextField novoPrecoField = new TextField();
         novoPrecoField.setPromptText("Digite o novo valor");
 
+        Label testeLabel = new Label("Novo Campo:");
+        TextField testeField = new TextField();
+        testeField.setPromptText("Digite o novo valor");
+
         Label descricaoLabel = new Label("Descrição da Proposta:");
         TextArea descricaoField = new TextArea();
         descricaoField.setPromptText("Explique sua proposta...");
@@ -40,13 +44,15 @@ public class TelaProposta {
 
         Button btnEnviar = new Button("Enviar Proposta");
 
-        formGrid.add(servicoLabel, 0, 0, 2, 1);
-        formGrid.add(precoAtualLabel, 0, 1, 2, 1);
+        formGrid.add(servicoLabel, 0, 0);
+        formGrid.add(precoAtualLabel, 0, 1);
         formGrid.add(novoPrecoLabel, 0, 2);
         formGrid.add(novoPrecoField, 1, 2);
-        formGrid.add(descricaoLabel, 0, 3);
-        formGrid.add(descricaoField, 0, 4, 2, 1);
-        formGrid.add(btnEnviar, 0, 5, 2, 1);
+        formGrid.add(testeLabel, 0, 3);
+        formGrid.add(testeField, 1, 3);
+        formGrid.add(descricaoLabel, 0, 4);
+        formGrid.add(descricaoField, 0, 5, 2, 1);
+        formGrid.add(btnEnviar, 0, 6, 2, 1);
 
         VBox secaoPropostas = new VBox(10);
         Label propostasTitulo = new Label("Propostas Existentes");
@@ -68,11 +74,13 @@ public class TelaProposta {
                 if (empty || proposta == null) {
                     setText(null);
                 } else {
-                    setText(String.format("%s: R$%.2f Solicitante: %s, Prestador: %s",
+                    setText(String.format("%s: R$%.2f Solicitante: %s, Prestador: %s, Teste: %s \nDescrição: %s",
                             proposta.getServico(),
                             proposta.getPreco(),
                             proposta.getSolicitante(),
-                            proposta.getPrestador()));
+                            proposta.getPrestador(),
+                            proposta.getTeste(),
+                            proposta.getJustificativa()));
                 }
             }
         });
@@ -85,6 +93,7 @@ public class TelaProposta {
             try {
                 double novoPreco = Double.parseDouble(novoPrecoField.getText());
                 String descricao = descricaoField.getText();
+                String testeCampo = testeField.getText();
 
                 String solicitante = "SolicitanteTeste";
                 String teste = "testeTitulo";
@@ -94,7 +103,7 @@ public class TelaProposta {
                     throw new IllegalArgumentException("A descrição é obrigatória");
                 }
 
-                Proposta proposta = new Proposta(novoPreco, descricao, teste,ControllerUsuario.usuarioLogado.getNome(),solicitante);
+                Proposta proposta = new Proposta(novoPreco, descricao, teste,ControllerUsuario.usuarioLogado.getNome(),solicitante,testeCampo);
 
                 new ControllerProposta().cadastrarProposta(proposta);
 

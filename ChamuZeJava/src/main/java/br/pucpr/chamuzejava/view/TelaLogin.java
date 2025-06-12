@@ -56,7 +56,7 @@ public class TelaLogin {
                     System.out.println("Login como ADMIN bem-sucedido!");
                     Main.mudarCena(TelaPerfilADM.criarTela());
                 } else if (usuario instanceof Prestador) {
-                    Main.mudarCena(TelaPrestadorInicial.criarTela());
+                    Main.mudarCena(TelaProposta.criarTela());
                 } else if (usuario instanceof Solicitante) {
                     Main.mudarCena(TelaSolicitanteInicial.criarTela());
                 }

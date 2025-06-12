@@ -9,5 +9,8 @@
         <module name="ChamuZeJava" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="ChamuZeJava" target="23" />
+    </bytecodeTargetLevel>
   </component>
 </project>
